@@ -1,0 +1,49 @@
+
+server:
+  port: 80
+management:
+  port: 54001
+  security:
+    enabled: false
+  health:
+    mail:
+      enabled: false
+spring:
+  application:
+    name: admin-managee
+  datasource:
+    url: jdbc:mysql://127.0.0.1/cds?useUnicode=true&amp;characterEncoding=UTF-8
+    username: cds
+    password: cds@123456
+    driver_class_namel: com.mysql.jdbc.Driver
+    type: com.alibaba.druid.pool.DruidDataSource
+    
+    max-active: 20
+    initial-size: 1
+    min-idle: 3
+    max-wait: 60000
+    time-between-eviction-runs-millis: 60000
+    min-evictable-idle-time-millis: 300000
+    test-while-idle: true
+    test-on-borrow: false
+    test-on-return: false
+    poolPreparedStatements: true
+
+
+debug: true
+
+mybatis:
+  typeAliasesPackage: cds.com.demo.webapp.model
+  mapper-locations: classpath:cds/com/demo/webapp/dao/*.xml
+
+info:
+  aaa:
+    name: xxx
+    email: xxx@qq.com
+  bbb:
+    age: 25
+    hobbies: running
+  build:
+    artifact: "@project.artifactId@"
+    name: "@project.name@"
+    version: "@project.version@"
