@@ -22,4 +22,6 @@ public interface UserServer {
 	 * @return
 	 */
 	public List<User> findAll();
+
+//	public List<User>
 }
