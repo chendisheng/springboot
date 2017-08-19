@@ -31,4 +31,13 @@ public class MainController {
         return "hello";
     }
 
+    @RequestMapping(value = "/valid", method= RequestMethod.GET)
+    public String validateForm(ModelMap model) {
+        model.put("time", new Date());
+        model.put("message", this.message);
+        return "validateForm";
+    }
+
+
+
 }

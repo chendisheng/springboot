@@ -1,3 +1,5 @@
+Spring:
+  profiles: dev
 
 server:
   port: 80
@@ -13,23 +15,13 @@ spring:
     name: admin-managee
   freemarker:
     request-context-attribute: request
-  datasource:
-    url: jdbc:mysql://127.0.0.1/cds?useUnicode=true&amp;characterEncoding=UTF-8
-    username: cds
-    password: cds@123456
-    driver_class_namel: com.mysql.jdbc.Driver
-    type: com.alibaba.druid.pool.DruidDataSource
-    
-    max-active: 20
-    initial-size: 1
-    min-idle: 3
-    max-wait: 60000
-    time-between-eviction-runs-millis: 60000
-    min-evictable-idle-time-millis: 300000
-    test-while-idle: true
-    test-on-borrow: false
-    test-on-return: false
-    poolPreparedStatements: true
+    cache: false
+    suffix: .ftl
+
+  profiles:
+    active: test
+
+
 
 
 debug: true
@@ -49,3 +41,6 @@ info:
     artifact: "@project.artifactId@"
     name: "@project.name@"
     version: "@project.version@"
+
+
+

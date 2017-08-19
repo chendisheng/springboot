@@ -162,7 +162,7 @@
                 return res;
             },
             editable:true,//开启编辑模式
-            sidePagination: "server", //表示服务端请求
+            sidePagination: "service", //表示服务端请求
             clickToSelect: true,
             cache : false,
             columns: [
@@ -202,7 +202,7 @@
             url:'http://localhost/data/getList2',
             editable:true,//开启编辑模式
             clickToSelect: true,
-            sidePagination: "server", //表示服务端请求
+            sidePagination: "service", //表示服务端请求
             cache : false,
             columns: [
                 {field:"ZSCQ_XS",title:"知识产权形式",align:"center",edit:{required:true ,type:'text'}},

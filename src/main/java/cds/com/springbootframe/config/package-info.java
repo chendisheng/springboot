@@ -5,4 +5,4 @@
  * @author Raye
  *
  */
-package cds.com.springboot.config;
+package cds.com.springbootframe.config;

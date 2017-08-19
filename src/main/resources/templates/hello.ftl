@@ -51,6 +51,8 @@
     <script src="/js/bootstrap-editable.js"></script>
     <script src="/js/validateUtil.js"></script>
 
+    <!-- jquery validate -->
+    <script src="/js/jquery.validate.min.js"></script>
 
 
 </head>
@@ -59,17 +61,12 @@
 
 <!-- Begin page content -->
 <div class="container">
+
     <div class="page-header">
         <h1>Sprint Boot: Hello</h1>
     </div>
 
-    <div>
-        Date: ${time?date}
-        <br>
-        Time: ${time?time}
-        <br>
-        Message: ${message}
-    </div>
+
 
     <div class="panel-body" style="padding-bottom:0px;">
         <div class="form form-group">
@@ -101,10 +98,15 @@
                 </a>
             </div>
         </div>
+        <form id="form2" class="form-horizontal">
         <table id="reportTable2" class="table table-bordered table-hover"></table>
+        <#--<a href="#" id="username" data-type="text" data-title="用户名">用户名</a>-->
+            <button id="check" class="btn btn-default">测试</button>
+            <button id="submit"  class="btn btn-primary btn-sm">
+                提交
+            </button>
+        </form>
 
-        <a href="#" id="username" data-type="text" data-title="用户名">用户名</a>
-        <button id="check" class="btn btn-default">测试</button>
     </div>
 
 </div>
@@ -247,7 +249,7 @@
                 };
             },
             editable:true,//开启编辑模式
-            sidePagination: "server", //表示服务端请求
+            sidePagination: "service", //表示服务端请求
             clickToSelect: true,
             cache : false,
             columns: [
@@ -301,7 +303,7 @@
             url:'${base}/data/getList2',
             editable:true,//开启编辑模式
             clickToSelect: true,
-            sidePagination: "server", //表示服务端请求
+            sidePagination: "service", //表示服务端请求
             cache : false,
             columns: [
                 {field:"rowNo",title:"rowNo",visible:false, align:"center",formatter:function (value,row,index) {
@@ -335,16 +337,97 @@
             }
         });
     }
+
+    var MyValidator = function() {
+        var handleSubmit = function() {
+            $('#form2').validate({
+                errorElement : 'span',
+                errorClass : 'help-block',
+                focusInvalid : false,
+                rules : {
+                    ZSCQ_XS : {
+                        required : true
+                    },
+                    ZSCQ_NAME : {
+                        required : true
+                    },
+                    ZSCQ_CODE : {
+                        required : true
+                    }
+                },
+                messages : {
+                    name : {
+                        required : "ZSCQ_XS is required."
+                    },
+                    password : {
+                        required : "ZSCQ_NAME is required."
+                    },
+                    intro : {
+                        required : "ZSCQ_CODE is required."
+                    }
+                },
+
+                highlight : function(element) {
+                    console.log("highlight");
+                    $(element).closest('.form-group').addClass('has-error');
+                },
+
+                success : function(label) {
+                    console.log("success");
+                    label.closest('.form-group').removeClass('has-error');
+                    label.remove();
+                },
+
+                errorPlacement : function(error, element) {
+                    console.log("errorPlacement");
+                    element.parent('div').append(error);
+                },
+
+                submitHandler : function(form) {
+                    console.log("submitHandler");
+                    form.submit();
+                }
+            });
+
+            $('.form-horizontal input').keypress(function(e) {
+                if (e.which == 13) {
+                    if ($('.form-horizontal').validate().form()) {
+                        $('.form-horizontal').submit();
+                    }
+                    return false;
+                }
+            });
+        }
+        return {
+            init : function() {
+                handleSubmit();
+            }
+        };
+
+    }();
+
+
     $(document).ready(function(){
+
+
         //$('#username').editable();
         loadEditTable(0);
 
         $('#check').on("click",function () {
             test();
+
+        })
+
+        $('#submit').on("click",function () {
+            console.log("test");
+            $('#form2').validate({
+                debug:true
+            })
+
         })
     });
 
-
+    MyValidator.init();
 
 </script>
 </body>

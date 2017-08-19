@@ -1,9 +1,9 @@
-package cds.com.demo.webapp.server.impl;
+package cds.com.demo.webapp.service.impl;
 
 import java.util.List;
 
 import cds.com.demo.webapp.dao.IUserDao;
-import cds.com.demo.webapp.server.UserServer;
+import cds.com.demo.webapp.service.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -15,7 +15,7 @@ import cds.com.demo.webapp.model.User;
  * @since 2016年10月11日19:29:02
  */
 @Repository
-public class UserServerImpl implements UserServer {
+public class UserServiceImpl implements IUserService {
 	@Autowired
 	private IUserDao userDao;
 	

@@ -1,4 +1,4 @@
-package cds.com.springboot.config;
+package cds.com.springbootframe.config;
 
 import javax.servlet.annotation.WebFilter;
 import javax.servlet.annotation.WebInitParam;

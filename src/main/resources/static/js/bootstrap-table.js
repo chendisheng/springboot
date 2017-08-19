@@ -308,8 +308,8 @@
         pagination: false,
         onlyInfoPagination: false,
         paginationLoop: true,
-        sidePagination: 'client', // client or server
-        totalRows: 0, // server side need to set
+        sidePagination: 'client', // client or service
+        totalRows: 0, // service side need to set
         pageNumber: 1,
         pageSize: 10,
         pageList: [10, 25, 50, 100],
@@ -917,7 +917,7 @@
             this.options.data = this.data;
         }
 
-        if (this.options.sidePagination === 'server') {
+        if (this.options.sidePagination === 'service') {
             return;
         }
         this.initSort();
@@ -1026,7 +1026,7 @@
         // Assign the correct sortable arrow
         this.getCaret();
 
-        if (this.options.sidePagination === 'server') {
+        if (this.options.sidePagination === 'service') {
             this.initServer(this.options.silentSort);
             return;
         }
@@ -1229,7 +1229,7 @@
     BootstrapTable.prototype.initSearch = function () {
         var that = this;
 
-        if (this.options.sidePagination !== 'server') {
+        if (this.options.sidePagination !== 'service') {
             if (this.options.customSearch !== $.noop) {
                 this.options.customSearch.apply(this, [this.searchText]);
                 return;
@@ -1313,7 +1313,7 @@
             data = this.getData(),
             pageList = this.options.pageList;
 
-        if (this.options.sidePagination !== 'server') {
+        if (this.options.sidePagination !== 'service') {
             this.options.totalRows = data.length;
         }
 
@@ -1540,7 +1540,7 @@
         }
 
         this.initPagination();
-        if (this.options.sidePagination === 'server') {
+        if (this.options.sidePagination === 'service') {
             this.initServer();
         } else {
             this.initBody();
@@ -1807,7 +1807,7 @@
 
         //Fix #389 Bootstrap-table-flatJSON is not working
 
-        if (!this.options.pagination || this.options.sidePagination === 'server') {
+        if (!this.options.pagination || this.options.sidePagination === 'service') {
             this.pageFrom = 1;
             this.pageTo = data.length;
         }
@@ -2383,7 +2383,7 @@
         var fixedScroll = false;
 
         // #431: support pagination
-        if (this.options.sidePagination === 'server') {
+        if (this.options.sidePagination === 'service') {
             this.options.totalRows = data[this.options.totalField];
             fixedScroll = data.fixedScroll;
             data = data[this.options.dataField];
@@ -2430,7 +2430,7 @@
             }
             if ($.inArray(row[params.field], params.values) !== -1) {
                 this.options.data.splice(i, 1);
-                if (this.options.sidePagination === 'server') {
+                if (this.options.sidePagination === 'service') {
                     this.options.totalRows -= 1;
                 }
             }

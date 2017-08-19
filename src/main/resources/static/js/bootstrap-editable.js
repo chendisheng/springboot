@@ -67,7 +67,7 @@ Editableform is linked with one of input types, e.g. 'text', 'select' etc.
             //show loading state
             this.showLoading();            
             
-            //flag showing is form now saving value to server. 
+            //flag showing is form now saving value to service.
             //It is needed to wait when closing form.
             this.isSaving = false;
             
@@ -233,12 +233,12 @@ Editableform is linked with one of input types, e.g. 'text', 'select' etc.
                 return;
             } 
 
-            //convert value for submitting to server
+            //convert value for submitting to service
             var submitValue = this.input.value2submit(newValue);
             
             this.isSaving = true;
             
-            //sending data to server
+            //sending data to service
             $.when(this.save(submitValue))
             .done($.proxy(function(response) {
                 this.isSaving = false;
@@ -306,14 +306,14 @@ Editableform is linked with one of input types, e.g. 'text', 'select' etc.
             
             var pk = (typeof this.options.pk === 'function') ? this.options.pk.call(this.options.scope) : this.options.pk,
             /*
-              send on server in following cases:
+              send on service in following cases:
               1. url is function
               2. url is string AND (pk defined OR send option = always) 
             */
             send = !!(typeof this.options.url === 'function' || (this.options.url && ((this.options.send === 'always') || (this.options.send === 'auto' && pk !== null && pk !== undefined)))),
             params;
 
-            if (send) { //send to server
+            if (send) { //send to service
                 this.showLoading();
 
                 //standard params
@@ -335,7 +335,7 @@ Editableform is linked with one of input types, e.g. 'text', 'select' etc.
                 if(typeof this.options.url === 'function') { //user's function
                     return this.options.url.call(this.options.scope, params);
                 } else {  
-                    //send ajax to server and return deferred object
+                    //send ajax to service and return deferred object
                     return $.ajax($.extend({
                         url     : this.options.url,
                         data    : params,
@@ -468,7 +468,7 @@ Editableform is linked with one of input types, e.g. 'text', 'select' etc.
         **/          
         params:null,
         /**
-        Name of field. Will be submitted on server. Can be taken from <code>id</code> attribute
+        Name of field. Will be submitted on service. Can be taken from <code>id</code> attribute
 
         @property name 
         @type string
@@ -503,8 +503,8 @@ Editableform is linked with one of input types, e.g. 'text', 'select' etc.
         **/        
         defaultValue: null,
         /**
-        Strategy for sending data on server. Can be `auto|always|never`.
-        When 'auto' data will be sent on server **only if pk and url defined**, otherwise new value will be stored locally.
+        Strategy for sending data on service. Can be `auto|always|never`.
+        When 'auto' data will be sent on service **only if pk and url defined**, otherwise new value will be stored locally.
 
         @property send 
         @type string
@@ -528,9 +528,9 @@ Editableform is linked with one of input types, e.g. 'text', 'select' etc.
         **/         
         validate: null,
         /**
-        Success callback. Called when value successfully sent on server and **response status = 200**.  
+        Success callback. Called when value successfully sent on service and **response status = 200**.
         Usefull to work with json response. For example, if your backend response can be <code>{success: true}</code>
-        or <code>{success: false, msg: "server error"}</code> you can check it inside this callback.  
+        or <code>{success: false, msg: "service error"}</code> you can check it inside this callback.
         If it returns **string** - means error occured and string is shown as error message.  
         If it returns **object like** <code>{newValue: &lt;something&gt;}</code> - it overwrites value, submitted by user.  
         Otherwise newValue simply rendered into element.
@@ -1201,7 +1201,7 @@ Applied as jQuery method.
             @param {Object} params.response ajax response
             @example
             $('#username').on('save', function(e, params) {
-                //assuming server response: '{success: true}'
+                //assuming service response: '{success: true}'
                 var pk = $(this).data('editableContainer').options.pk;
                 if(params.response && params.response.success) {
                     alert('value: ' + params.newValue + ' with pk: ' + pk + ' saved!');
@@ -1623,7 +1623,7 @@ Makes editable any HTML element on the page. Applied as jQuery method.
         Can call custom display method from options.
         Can return deferred object.
         @method render()
-        @param {mixed} response server response (if exist) to pass into display function
+        @param {mixed} response service response (if exist) to pass into display function
         */          
         render: function(response) {
             //do not display anything
@@ -1834,7 +1834,7 @@ Makes editable any HTML element on the page. Applied as jQuery method.
                 /*
                  Add unsaved css to element if:
                   - url is not user's function 
-                  - value was not sent to server
+                  - value was not sent to service
                   - params.response === undefined, that means data was not sent
                   - value changed 
                 */
@@ -2025,7 +2025,7 @@ Makes editable any HTML element on the page. Applied as jQuery method.
             return result;
 
             /**
-            This method collects values from several editable elements and submit them all to server.   
+            This method collects values from several editable elements and submit them all to service.
             Internally it runs client-side validation for all fields and submits only in case of success.  
             See <a href="#newrecord">creating new records</a> for details.  
             Since 1.5.1 `submit` can be applied to single element to send data programmatically. In that case
@@ -2040,7 +2040,7 @@ Makes editable any HTML element on the page. Applied as jQuery method.
             @param {function} options.success(obj,config) success handler
             @returns {Object} jQuery object
             **/
-            case 'submit':  //collects value, validate and submit to server for creating new record
+            case 'submit':  //collects value, validate and submit to service for creating new record
                 var config = arguments[1] || {},
                 $elems = this,
                 errors = this.editable('validate');
@@ -2227,13 +2227,13 @@ Makes editable any HTML element on the page. Applied as jQuery method.
         _**Parameters:**_  
         
         * `value` current value to be displayed
-        * `response` server response (if display called after ajax submit), since 1.4.0
+        * `response` service response (if display called after ajax submit), since 1.4.0
          
         For _inputs with source_ (select, checklist) parameters are different:  
           
         * `value` current value to be displayed
         * `sourceData` array of items for current input (e.g. dropdown items) 
-        * `response` server response (if display called after ajax submit), since 1.4.0
+        * `response` service response (if display called after ajax submit), since 1.4.0
                   
         To get currently selected items use `$.fn.editableutils.itemsByValue(value, sourceData)`.
         
@@ -2266,7 +2266,7 @@ Makes editable any HTML element on the page. Applied as jQuery method.
         **/        
         emptyclass: 'editable-empty',
         /**
-        Css class applied when value was stored but not sent to server (`pk` is empty or `send = 'never'`).  
+        Css class applied when value was stored but not sent to service (`pk` is empty or `send = 'never'`).
         You may set it to `null` if you work with editables locally and submit them together.  
 
         @property unsavedclass 
@@ -2386,7 +2386,7 @@ To create your own input you can inherit from this class.
        },
 
        /**
-        Converts value to string (for internal compare). For submitting to server used value2submit().
+        Converts value to string (for internal compare). For submitting to service used value2submit().
 
         @method value2str(value) 
         @param {mixed} value
@@ -2397,7 +2397,7 @@ To create your own input you can inherit from this class.
        }, 
 
        /**
-        Converts string received from server into value. Usually from `data-value` attribute.
+        Converts string received from service into value. Usually from `data-value` attribute.
 
         @method str2value(str)
         @param {string} str
@@ -2408,7 +2408,7 @@ To create your own input you can inherit from this class.
        }, 
        
        /**
-        Converts value for submitting to server. Result can be string or object.
+        Converts value for submitting to service. Result can be string or object.
 
         @method value2submit(value) 
         @param {mixed} value
@@ -2695,7 +2695,7 @@ List - abstract class for inputs that have source option loaded from js array or
                     }, this)
                 }, this.options.sourceOptions);
                 
-                //loading sourceData from server
+                //loading sourceData from service
                 $.ajax(ajaxOptions);
                 
             } else { //options as json/array
@@ -2859,7 +2859,7 @@ List - abstract class for inputs that have source option loaded from js array or
         **/        
         sourceCache: true,
         /**
-        Additional ajax options to be used in $.ajax() when loading list from server.
+        Additional ajax options to be used in $.ajax() when loading list from service.
         Useful to send extra parameters (`data` key) or change request method (`type` key).
         
         @property sourceOptions 
@@ -4576,7 +4576,7 @@ $(function(){
         **/         
         inputclass: null,
         /**
-        Format used for sending value to server. Also applied when converting date from <code>data-value</code> attribute.<br>
+        Format used for sending value to service. Also applied when converting date from <code>data-value</code> attribute.<br>
         See list of tokens in [momentjs docs](http://momentjs.com/docs/#/parsing/string-format)  
         
         @property format 
@@ -6352,7 +6352,7 @@ $(function(){
         **/
         inputclass: null,
         /**
-        Format used for sending value to server. Also applied when converting date from <code>data-value</code> attribute.<br>
+        Format used for sending value to service. Also applied when converting date from <code>data-value</code> attribute.<br>
         Possible tokens are: <code>d, dd, m, mm, yy, yyyy</code>  
 
         @property format 
@@ -6684,7 +6684,7 @@ $(function(){
         **/
         inputclass: null,
         /**
-        Format used for sending value to server. Also applied when converting date from <code>data-value</code> attribute.<br>
+        Format used for sending value to service. Also applied when converting date from <code>data-value</code> attribute.<br>
         Possible tokens are: <code>d, dd, m, mm, yy, yyyy, h, i</code>  
         
         @property format 

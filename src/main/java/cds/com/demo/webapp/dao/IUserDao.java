@@ -9,7 +9,7 @@ import java.util.List;
 /**
  * Created by edison on 2017/7/22.
  */
-@Repository("userDao")
+@Repository
 public interface IUserDao {
     int insert(@Param("user") User record);
     List<User> selectAll();

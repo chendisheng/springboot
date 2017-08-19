@@ -1,4 +1,4 @@
-package cds.com.demo.webapp.server;
+package cds.com.demo.webapp.service;
 
 import java.util.List;
 
@@ -9,7 +9,7 @@ import cds.com.demo.webapp.model.User;
  * @author Raye
  * @since 2016年9月21日20:57:39
  */
-public interface UserServer {
+public interface IUserService {
 	/**
 	 * 添加一个用户
 	 * @param user 用户对象

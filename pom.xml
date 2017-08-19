@@ -26,6 +26,12 @@
             <version>4.12</version>
             <scope>test</scope>
         </dependency>
+        <!-- 测试模块，包括JUnit、Hamcrest、Mockito -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
         <!-- Springboot -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
