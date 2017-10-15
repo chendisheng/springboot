@@ -1,0 +1,9 @@
+package cds.com.springbootframe.common.auth;
+
+/**
+ * Created by edison on 2017/8/12.
+ * @author edison
+ */
+public class AuthInterceptor {
+
+}
