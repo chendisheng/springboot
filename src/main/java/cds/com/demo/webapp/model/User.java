@@ -3,6 +3,9 @@ package cds.com.demo.webapp.model;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
+/**
+ * @author edison
+ */
 @ApiModel
 public class User {
 	

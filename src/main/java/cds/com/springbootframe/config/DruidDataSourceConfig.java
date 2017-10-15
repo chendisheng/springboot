@@ -20,11 +20,11 @@ import com.alibaba.druid.pool.DruidDataSource;
  * @author Raye
  * @since 2016年10月7日14:14:18
  */
-
 public class DruidDataSourceConfig  implements EnvironmentAware {
 
     private RelaxedPropertyResolver propertyResolver;
 
+    @Override
     public void setEnvironment(Environment env) {
         this.propertyResolver = new RelaxedPropertyResolver(env, "spring.datasource.");
     }

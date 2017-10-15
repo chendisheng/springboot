@@ -14,4 +14,43 @@
     <select id="selectAll" resultMap="BaseResultMap">
         select * FROM USER
     </select>
+
+    <select id="selectByIds" resultMap="BaseResultMap">
+        select * from USER
+        WHERE ID IN
+
+        <foreach collection="ids" item="item" index="index" separator="," open="(" close=")">
+            #{item}
+        </foreach>
+
+    </select>
+
+    <select id="selectAutoByIds" resultType="cds.com.demo.webapp.model.UserVo">
+        select
+        id as `VALUE` ,
+        username as `label`,
+        psw as `desc`
+        from USER
+        WHERE ID IN
+        <foreach collection="ids" item="item" index="index" separator="," open="(" close=")">
+            #{item}
+        </foreach>
+
+    </select>
+    <select id="selectAutoById" resultType="cds.com.demo.webapp.model.UserVo">
+        select
+          id as `VALUE` ,
+          username as `label`,
+          psw as `desc`
+        from USER
+        where id like concat('%',#{id},'%')
+    </select>
+    <select id="selectAutoByName" resultType="cds.com.demo.webapp.model.UserVo">
+        select
+        id as `VALUE` ,
+        username as `label`,
+        psw as `desc`
+        from USER
+        where username like concat('%',#{name},'%')
+    </select>
 </mapper>

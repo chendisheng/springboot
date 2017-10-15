@@ -3,6 +3,7 @@ package cds.com.demo.webapp.model;
 import java.util.Map;
 
 /**
+ * @author edison
  * Created by edison on 2017/8/4.
  */
 public class ServiceData {

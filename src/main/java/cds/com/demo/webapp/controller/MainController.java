@@ -10,7 +10,7 @@ import java.util.Date;
 
 
 /**
- * Created by edison on 2017/8/2.
+ * @author edison
  */
 @Controller
 public class MainController {
@@ -37,6 +37,32 @@ public class MainController {
         model.put("message", this.message);
         return "validateForm";
     }
+    @RequestMapping(value = "/select", method= RequestMethod.GET)
+    public String select(ModelMap model) {
+        model.put("time", new Date());
+        model.put("message", this.message);
+        return "select";
+    }
+
+    @RequestMapping(value = "/autocomplete", method= RequestMethod.GET)
+    public String auto(ModelMap model) {
+        model.put("time", new Date());
+        model.put("message", this.message);
+        return "autocomplete";
+    }
+    @RequestMapping(value = "/automul", method= RequestMethod.GET)
+    public String automul(ModelMap model) {
+        model.put("time", new Date());
+        model.put("message", this.message);
+        return "automul";
+    }
+    @RequestMapping(value = "/demo", method= RequestMethod.GET)
+    public String demo(ModelMap model) {
+        model.put("time", new Date());
+        model.put("message", this.message);
+        return "demo";
+    }
+
 
 
 

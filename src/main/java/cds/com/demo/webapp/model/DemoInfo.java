@@ -7,7 +7,8 @@ import org.springframework.data.annotation.Id;
 import java.io.Serializable;
 
 /**
- * Created by edison on 2017/7/28.
+ * @author edison
+ * 2017/7/28.
  */
 
 @Configuration

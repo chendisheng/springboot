@@ -3,6 +3,7 @@ package cds.com.demo.webapp.service;
 import java.util.List;
 
 import cds.com.demo.webapp.model.User;
+import cds.com.demo.webapp.model.UserVo;
 
 /**
  * 用户服务
@@ -23,5 +24,34 @@ public interface IUserService {
 	 */
 	public List<User> findAll();
 
-//	public List<User>
+	/**
+	 * get user list by id
+	 * @param ids
+	 * @return
+	 */
+	public List<User> findById(String ids);
+
+
+	/**
+	 * get user list by id
+	 * @param ids
+	 * @return
+	 */
+	List<UserVo> autofindByIds(String ids);
+
+	/**
+	 * get user list by id
+	 * @param ids
+	 * @return
+	 */
+	List<UserVo> autoFindById(String ids);
+
+	/**
+	 * get user list by name
+	 * @param name
+	 * @return
+	 */
+	List<UserVo>  autoFindByName(String name);
+
+
 }

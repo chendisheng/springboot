@@ -11,33 +11,33 @@
     <title>Spring Boot - hello</title>
 
     <!-- Bootstrap core CSS -->
-    <#--<link href="/css/bootstrap.min.css" rel="stylesheet">-->
-    <#--<link href="/css/main.css" rel="stylesheet">-->
-    <#--<link rel="stylesheet" href="/css/bootstrap.min.css">-->
-    <#--<link rel="stylesheet" href="/css/bootstrap-table.css">-->
-    <#--<link href="/css/bootstrap-table.min.css" rel="stylesheet" />-->
-    <#--<link href="/css/bootstrap-datetimepicker.min.css" rel="stylesheet" />-->
+<#--<link href="/css/bootstrap.min.css" rel="stylesheet">-->
+<#--<link href="/css/main.css" rel="stylesheet">-->
+<#--<link rel="stylesheet" href="/css/bootstrap.min.css">-->
+<#--<link rel="stylesheet" href="/css/bootstrap-table.css">-->
+<#--<link href="/css/bootstrap-table.min.css" rel="stylesheet" />-->
+<#--<link href="/css/bootstrap-datetimepicker.min.css" rel="stylesheet" />-->
 
-    <#--<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries &ndash;&gt;-->
-    <#--<!--[if lt IE 9]>-->
-    <#--<script src="//cdn.jsdelivr.net/html5shiv/3.7.3/html5shiv.min.js"></script>-->
-    <#--<script src="//cdn.jsdelivr.net/respond/1.4.2/respond.min.js"></script>-->
-    <#--<![endif]&ndash;&gt;-->
+<#--<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries &ndash;&gt;-->
+<#--<!--[if lt IE 9]>-->
+<#--<script src="//cdn.jsdelivr.net/html5shiv/3.7.3/html5shiv.min.js"></script>-->
+<#--<script src="//cdn.jsdelivr.net/respond/1.4.2/respond.min.js"></script>-->
+<#--<![endif]&ndash;&gt;-->
 
 
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-    <#--<script src="//cdn.jsdelivr.net/ie10-viewport/1.0.0/ie10-viewport.min.js"></script>-->
-    <#--<script src="/js/jquery.min.js"></script>-->
-    <#--<script src="/js/bootstrap.min.js"></script>-->
-    <#--<script src="/js/bootstrap.min.js"></script>-->
-    <#--<script src="/js/bootstrap-table.js"></script>-->
-    <#--<!-- put your locale files after bootstrap-table.js &ndash;&gt;-->
-    <#--<script src="/js/bootstrap-table-zh-CN.js"></script>-->
+<#--<script src="//cdn.jsdelivr.net/ie10-viewport/1.0.0/ie10-viewport.min.js"></script>-->
+<#--<script src="/js/jquery.min.js"></script>-->
+<#--<script src="/js/bootstrap.min.js"></script>-->
+<#--<script src="/js/bootstrap.min.js"></script>-->
+<#--<script src="/js/bootstrap-table.js"></script>-->
+<#--<!-- put your locale files after bootstrap-table.js &ndash;&gt;-->
+<#--<script src="/js/bootstrap-table-zh-CN.js"></script>-->
 
-    <#--<script src="/js/bootstrap-table.js"></script>-->
-    <#--<script src="/js/bootstrap-table-editable.js"></script>-->
-    <#--<script src="/js/bootstrap-select.js"></script>-->
-    <#--<script src="/js/bootstrap-datetimepicker.min.js"></script>-->
+<#--<script src="/js/bootstrap-table.js"></script>-->
+<#--<script src="/js/bootstrap-table-editable.js"></script>-->
+<#--<script src="/js/bootstrap-select.js"></script>-->
+<#--<script src="/js/bootstrap-datetimepicker.min.js"></script>-->
 
     <!-- 可编辑 -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -69,6 +69,7 @@
 
 
     <div class="panel-body" style="padding-bottom:0px;">
+        <form id="form2" class="form-horizontal">
         <div class="form form-group">
             <div class="my_table_bar">
                 <div class="col-xs-11 bar_title">
@@ -98,13 +99,17 @@
                 </a>
             </div>
         </div>
-        <form id="form2" class="form-horizontal">
+
         <table id="reportTable2" class="table table-bordered table-hover"></table>
         <#--<a href="#" id="username" data-type="text" data-title="用户名">用户名</a>-->
-            <button id="check" class="btn btn-default">测试</button>
-            <button id="submit"  class="btn btn-primary btn-sm">
-                提交
-            </button>
+        <div>
+            <input id="test1" name="test1" />
+            <input id="test2" name="test2" />
+        </div>
+        <button id="check" class="btn btn-default">测试</button>
+        <button id="submit"  class="btn btn-primary btn-sm">
+            提交
+        </button>
         </form>
 
     </div>
@@ -220,7 +225,7 @@
 
 
     function inputModel(value, row, index,key) {
-        return "<input type=\"text\" name=\""+key+"\" value=\"" + value + "\" onchange='reloadRowData(this, " + JSON.stringify(row) + ", " + index + ", \"" + key + "\")' />";
+        return "<input type=\"text\" class=\“form-control\” name=\""+key+"\" value=\"" + value + "\" onchange='reloadRowData(this, " + JSON.stringify(row) + ", " + index + ", \"" + key + "\")' />";
     }
 
 
@@ -368,23 +373,23 @@
                 },
 
                 highlight : function(element) {
-                    console.log("highlight");
+//                    console.log("highlight");
                     $(element).closest('.form-group').addClass('has-error');
                 },
 
                 success : function(label) {
-                    console.log("success");
+//                    console.log("success");
                     label.closest('.form-group').removeClass('has-error');
                     label.remove();
                 },
 
                 errorPlacement : function(error, element) {
-                    console.log("errorPlacement");
+//                    console.log("errorPlacement");
                     element.parent('div').append(error);
                 },
 
                 submitHandler : function(form) {
-                    console.log("submitHandler");
+//                    console.log("submitHandler");
                     form.submit();
                 }
             });

@@ -5,23 +5,32 @@ import java.util.List;
 import java.util.Map;
 
 /**
+ * @author edison
  * Created by edison on 2017/8/4.
  */
 public class PageDto {
 
-    /* 总数 */
+    /**
+     * 总数
+     */
     private int total;
 
-    /* 每页显示条数，默认 10 */
+    /**
+    * 每页显示条数，默认 10
+    */
     private int size = 10;
 
-    /* 总页数 */
+    /**
+    * 总页数
+    */
     private int pages;
 
-    /* 当前页 */
+    /**
+    * 当前页
+    */
     private int current = 1;
 
-    /* 查询总记录数（默认 true） */
+    /** 查询总记录数（默认 true） */
     private boolean searchCount = true;
 
     /**

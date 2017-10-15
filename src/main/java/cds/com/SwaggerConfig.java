@@ -6,11 +6,17 @@ import org.springframework.context.annotation.Configuration;
 import springfox.documentation.builders.PathSelectors;
 import springfox.documentation.builders.RequestHandlerSelectors;
 import springfox.documentation.service.ApiInfo;
+import springfox.documentation.service.Contact;
 import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spring.web.plugins.Docket;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
+import java.util.ArrayList;
+
+import static com.google.common.collect.Lists.newArrayList;
+
 /**
+ * @author edison
  * SwaggerConfig
  */
 @Configuration
@@ -35,13 +41,15 @@ public class SwaggerConfig {
 
 
     private ApiInfo apiInfo() {
-        ApiInfo apiInfo = new ApiInfo("SpringBoot学习demo",//大标题
-                "Spring boot + swagger + mybatis + druid",//小标题
-                "1.0",//版本
+        ApiInfo apiInfo = new ApiInfo("SpringBoot学习demo",
+                "Spring boot + swagger + mybatis + druid",
+                "1.0",
                 "NO terms of service",
-                "admin@raye.wang",//作者
-                "RayeBlog",//链接显示文字
-                "http://www.raye.wang/"//网站链接
+                 new Contact("admin@raye.wang","","admin@raye.wang"),
+                "RayeBlog",
+                "http://www.raye.wang/",
+                new ArrayList()
+
         );
 
         return apiInfo;

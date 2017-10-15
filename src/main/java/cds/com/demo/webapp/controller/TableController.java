@@ -16,12 +16,14 @@ import java.util.List;
 
 
 /**
+ * @author edison
  * Created by edison on 2017/8/2.
  */
 @RequestMapping("/data")
 @Controller
 public class TableController {
 
+    private static final Integer COUNT = 5;
     @Value("${application.message:Hello World}")
     private String message = "Hello World";
 
@@ -30,14 +32,12 @@ public class TableController {
     @RequestMapping(value="getList", method= RequestMethod.GET)
     @ResponseBody
     public Object hello() {
-//        model.put("time", new Date());
-//        model.put("message", this.message);
 
         ServiceData sd = new ServiceData();
         List<HashMap<String,String>> list = new ArrayList<HashMap<String,String>>();
 
-        for(int i = 0 ; i< 5 ; i++){
-            HashMap<String,String> hashMap = new HashMap<String, String>();
+        for(int i = 0 ; i< COUNT ; i++){
+            HashMap<String,String> hashMap = new HashMap<String, String>(16);
             hashMap.put("JX_NAME","JX_NAME"+i);
             hashMap.put("JX_ORG","JX_ORG"+i);
             hashMap.put("JX_TIME","JX_TIME"+i);
@@ -65,8 +65,8 @@ public class TableController {
 
         List<HashMap<String,String>> list = new ArrayList<HashMap<String,String>>();
 
-        for(int i = 0 ; i< 5 ; i++){
-            HashMap<String,String> hashMap = new HashMap<String, String>();
+        for(int i = 0 ; i< COUNT ; i++){
+            HashMap<String,String> hashMap = new HashMap<String, String>(16);
             hashMap.put("ZSCQ_XS","ZSCQ_XS"+i);
             hashMap.put("ZSCQ_NAME","ZSCQ_NAME"+i);
             hashMap.put("ZSCQ_CODE","ZSCQ_CODE"+i);
