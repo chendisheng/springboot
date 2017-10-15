@@ -22,6 +22,8 @@
             function extractLast( term ) {
                 return split( term ).pop();
             }
+
+
             //在JSON对象数组查询 指定值对象
             function getItem(array,n,v){
                 var obj ;
@@ -67,7 +69,11 @@
                         }
                     })
                     .autocomplete({
-                        source: "http://localhost:8081/selectize/getByLike",
+                        source: function( request, response ) {
+                            $.getJSON( "http://localhost:8081/selectize/getByLike",
+                                    { term: extractLast( request.term )
+                            }, response );
+                        },
                         search: function() {
                             // custom minLength
                             var term = extractLast( this.value );
@@ -120,7 +126,7 @@
                             terms.pop();
                             // add the selected item
                             var data ={};
-                            var url = $( "#birds" ).autocomplete( "option").source ;
+                            var url = "http://localhost:8081/selectize/getByLike" ;
                             $.ajax({
                                 url: url ,
                                 data: {term:ui.item.value},
