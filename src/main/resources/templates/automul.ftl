@@ -16,11 +16,16 @@
     <script>
         $( function() {
             function split( val ) {
-                val.replace(/;\s*/,',');
-                return val.split( /,\s*/ );
+               var str = val.replace(/;/,',');
+                return str.split( /,\s*/ );
             }
             function extractLast( term ) {
                 return split( term ).pop();
+            }
+            function getArrayParam(term){
+                var array = term.split( /;\s*/ );
+                array.pop();
+                return array;
             }
 
 
@@ -38,8 +43,9 @@
 
             function getItemView(data,term){
                 var itemView = [] ;
-                var valArray = extractLast(term);
-                for(var j = 0; j < valArray.length(); j++){
+                var valArray = split(term);
+                for(var j = 0; j < valArray.length; j++){
+                    var v = valArray[j];
                     for (var i = 0; i < data.length; i++){
                         if (data[i]["value"]==v){
                             itemView.push(data[i].label);
@@ -90,10 +96,11 @@
                             console.log(this.value);
                             var inputVals = this.value;
                             if(inputVals.indexOf(";") != -1){
-                                var ids = extractLast(inputVals);
+                                var ids = split(inputVals);
+
                                 $.ajax({
                                     url: 'http://localhost:8081/selectize/getByMulIds' ,
-                                    data: {id:ids.join(',')},
+                                    data: {userId:ids.join(',')},
                                     type: 'GET',
                                     async: false,
                                     error: function() {
@@ -104,10 +111,13 @@
                                         console.log(res);
 //                                        var source = $( "#birds" ).autocomplete( "option", "source" );
                                         var itemViews = getItemView(res,inputVals);
-                                        this.value = itemViews.join(",");
+                                        itemViews.push(" ")
+                                        $('#birds').val(itemViews.join(","));
 
                                     }
                                 });
+
+                                return false;
                             }
                             console.log("response function exit");
 //
