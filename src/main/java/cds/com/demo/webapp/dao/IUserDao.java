@@ -53,4 +53,26 @@ public interface IUserDao {
      */
     List<UserVo> selectAutoByName(@Param("name") String name);
 
+
+    /**
+     * 根据用户ID 多个查用户列表 自动补全
+     * @param ids
+     * @return
+     */
+    List<User> findAutoByIds(@Param("ids") List<String> ids);
+
+    /**
+     * 根据用户ID 模糊 查用户列表 自动补全
+     * @param id
+     * @return
+     */
+    List<User> findAutoById(@Param("id") String id);
+
+    /**
+     * 根据用户name 模糊 查用户列表 自动补全
+     * @param name
+     * @return
+     */
+    List<User> findAutoByName(@Param("name") String name);
+
 }

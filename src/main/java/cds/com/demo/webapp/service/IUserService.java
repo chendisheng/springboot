@@ -54,4 +54,27 @@ public interface IUserService {
 	List<UserVo>  autoFindByName(String name);
 
 
+	/**
+	 * get user list by id
+	 * @param ids
+	 * @return
+	 */
+	List<User> findUserByIds(String ids);
+
+	/**
+	 * get user list by id
+	 * @param ids
+	 * @return
+	 */
+	List<User> findUserById(String ids);
+
+	/**
+	 * get user list by name
+	 * @param name
+	 * @return
+	 */
+	List<User>  findUserByName(String name);
+
+
+
 }

@@ -69,6 +69,48 @@ public class UserServiceImpl implements IUserService {
 	}
 
 	/**
+	 * 根据用户ID（多个）查询 用户列表
+	 * @param param
+	 * @return
+	 */
+	@Override
+	public List<User> findUserByIds(String param) {
+		List<User> userList ;
+		if(param != null && param.contains(",")){
+			String[] idArray = param.split(",");
+			List<String> list =  Arrays.asList(idArray);
+			userList = userDao.findAutoByIds(list);
+		}else if(StringUtils.isNumber(param)){
+			userList = userDao.findAutoById(param);
+		}else {
+			userList = userDao.findAutoByName(param);
+		}
+
+		return userList;
+	}
+
+	/**
+	 * 根据用户name 模糊查询 用户列表
+	 * @param ids
+	 * @return
+	 */
+	@Override
+	public List<User> findUserById(String ids) {
+		return userDao.findAutoById(ids);
+	}
+
+	/**
+	 * 根据用户name 模糊查询 用户列表
+	 * @param name
+	 * @return
+	 */
+	@Override
+	public List<User> findUserByName(String name) {
+		return userDao.findAutoByName(name);
+	}
+
+
+	/**
 	 * 根据用户name 模糊查询 用户列表
 	 * @param name
 	 * @return

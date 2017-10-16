@@ -81,4 +81,34 @@ public class SelectController {
 		}
 		return server.autofindByIds(term.replaceAll(";",","));
 	}
+
+	/**
+	 * 查询批量用户 自动补全
+	 * @since 2016年9月22日20:32:43
+	 * @return
+	 */
+	@RequestMapping("/queryByMulIds")
+	@ApiOperation(notes="查询批量用户 自动补全",value="查询批量用户 自动补全",httpMethod="GET")
+	@ResponseBody
+	public List<User> findByMulId(@RequestParam(required = false) String userId){
+		if(StringUtils.isEmpty(userId)){
+			return null;
+		}
+		return server.findUserByIds(userId.replaceAll(";",","));
+	}
+
+	/**
+	 * 查询批量用户 自动补全
+	 * @since 2016年9月22日20:32:43
+	 * @return
+	 */
+	@RequestMapping("/queryByLike")
+	@ApiOperation(notes="查询批量用户 自动补全",value="查询批量用户 自动补全",httpMethod="GET")
+	@ResponseBody
+	public List<User> findUserById(@RequestParam(required = false,value="term") String term){
+		if(StringUtils.isEmpty(term)){
+			return null ;
+		}
+		return server.findUserByIds(term.replaceAll(";",","));
+	}
 }

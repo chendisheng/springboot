@@ -53,4 +53,27 @@
         from USER
         where username like concat('%',#{name},'%')
     </select>
+
+    <select id="findAutoByIds" resultMap="BaseResultMap">
+        select
+        *
+        from USER
+        WHERE ID IN
+        <foreach collection="ids" item="item" index="index" separator="," open="(" close=")">
+            #{item}
+        </foreach>
+
+    </select>
+    <select id="findAutoById" resultMap="BaseResultMap">
+        select
+        *
+        from USER
+        where id like concat('%',#{id},'%')
+    </select>
+    <select id="findAutoByName" resultMap="BaseResultMap">
+        select
+        *
+        from USER
+        where username like concat('%',#{name},'%')
+    </select>
 </mapper>

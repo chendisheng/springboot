@@ -76,7 +76,8 @@
             <p>Examples of how to interact with the control programmatically.</p>
             <div class="control-group">
                 <label for="select-tools">Tools:</label>
-                <select id="select-tools" multiple placeholder="Pick a tool..."></select>
+                <#--<select id="select-tools" multiple placeholder="Pick a tool..."></select>-->
+                <input id="select-tools" multiple />
             </div>
             <div class="buttons">
                 <input type="button" value="clear()" id="button-clear">
@@ -86,7 +87,19 @@
                 <input type="button" value="setValue()" id="button-setvalue">
             </div>
             <script>
-
+                function addValue(array,newArray){
+                    for(var i=0 ; i< newArray.length;i++){
+                        array.push(newArray[i]);
+                    }
+                    return array;
+                }
+                function split( val ) {
+                    var str = val.replace(/;/,',');
+                    return str.split( /,\s*/ );
+                }
+                function extractLast( term ) {
+                    return split( term ).pop();
+                }
                 var formatName = function(item) {
                     return $.trim((item.id || '') + ' ' + (item.username || ''));
                 };
@@ -116,35 +129,72 @@
                         option: function(item, escape) {
                             var name = item.id;
                             var label = name || item.username;
-                            var caption = name ? item.psw : null;
+                            var caption = name ? item.username : null;
                             return '<div>' +
                                     '<span class="label">' + escape(label) + '</span>' +
                                     (caption ? '<span class="caption">' + escape(caption) + '</span>' : '') +
                                     '</div>';
                         }
                     },
-//                    score: function(search) {
-//                        var score = this.getScoreFunction(search);
-//                        return function(item) {
-//                            return score(item) * (1 + Math.min(item.watchers / 100, 1));
-//                        };
-//                    },
+
                     load: function(query, callback) {
+//                        query = $("#select-tools-selectized").val();
                         if (!query.length) return callback();
                         console.log("load");
-                        $.ajax({
-//                            url: 'http://localhost:8081/selectize/getUserById?userId=' + encodeURIComponent(query),
-                            url: 'http://localhost:8081/user/all' ,
-                            type: 'GET',
-                            async: false,
-                            error: function() {
+                        if(query.indexOf(";") != -1 || query.indexOf(",")!= -1){
+                            var ids = split(query);
 
-                                callback();
-                            },
-                            success: function(res) {
-                                callback(res);
-                            }
-                        });
+                            $.ajax({
+                                url: 'http://localhost:8081/selectize/queryByMulIds' ,
+                                data: {userId:ids.join(',')},
+                                type: 'GET',
+                                async: false,
+                                error: function() {
+                                    console.log(" >>>多值复制 后查询出错 ");
+                                },
+                                success: function(res) {
+                                    console.log(" >>>多值复制 后查询结果 ");
+                                    console.log(res);
+////                                        var source = $( "#birds" ).autocomplete( "option", "source" );
+//                                    var itemViews = getItemView(res,inputVals);
+//                                    itemViews.push(" ")
+//                                    $('#birds').val(itemViews.join(","));
+                                    callback(res);
+
+                                    var control = $select[0].selectize;
+//                                    var controlId = control
+                                    console.log($(control.$input).attr("id"));
+                                    var value = control.getValue();
+                                    var valArray = split(value);
+                                    for(var i=0 ; i< ids.length;i++){
+                                        valArray.push(ids[i]);
+                                    }
+                                    control.setValue(valArray);
+                                    $("#select-tools-selectized").val("");
+                                }
+                            });
+
+
+                        }else{
+                            var param = extractLast(query);
+                            $.ajax({
+//                            url: 'http://localhost:8081/selectize/getUserById?userId=' + encodeURIComponent(query),
+                                url: 'http://localhost:8081/selectize/queryByLike' ,
+                                data: {term:param},
+                                type: 'GET',
+                                async: false,
+                                error: function() {
+
+                                    callback();
+                                },
+                                success: function(res) {
+                                    callback(res);
+                                }
+                            });
+                        }
+
+
+
 
                         queryData = query.split(",");
 
