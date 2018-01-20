@@ -87,7 +87,7 @@ public class UserController {
 		OutputStream out = response.getOutputStream();;
 		try {
 			response.setHeader("content-Type", "application/vnd.ms-excel");
-
+			response.flushBuffer();
 			workbook.write(out);
 
 
