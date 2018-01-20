@@ -12,7 +12,7 @@ management:
       enabled: false
 spring:
   application:
-    name: admin-managee
+    name: springbootdemo
   freemarker:
     request-context-attribute: request
     cache: false
