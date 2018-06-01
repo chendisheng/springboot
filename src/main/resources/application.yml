@@ -1,15 +1,8 @@
-Spring:
-  profiles: dev
-
 server:
-  port: 80
-management:
-  port: 54001
-  security:
-    enabled: false
-  health:
-    mail:
-      enabled: false
+  port: 8080
+  #上下文
+  context-path: /cdstest
+#服务端口
 spring:
   application:
     name: springbootdemo
@@ -26,10 +19,13 @@ spring:
 
 debug: true
 
+#mybatis配置
 mybatis:
   typeAliasesPackage: cds.com.demo.webapp.model
   mapper-locations: classpath:cds/com/demo/webapp/dao/*.xml
 
+#健康检查  http://[ip:port]/[context-path]/info
+#如        http://127.0.0.1:8080/cdstest/info
 info:
   aaa:
     name: xxx
